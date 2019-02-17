@@ -1,2 +1,70 @@
-1 init
+init
+---------------------------------
+( 1 )
+$ php artisan migrate
+$ php artisan make:auth
+$ npm install admin-lte --save
+$ npm install
+$ php artisan serve
+$ npm install font-awesome
+
+######
+
+( 2, 3 )
+in crud\resources\sass\app.scss:
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+// Font-awesome
+$fa-font-path:'../fonts/' !default;
+@import '~font-awesome/scss/font-awesome';
+// Admin-lte
+@import '~admin-lte/dist/css/adminLTE.css';
+@import '~admin-lte/dist/css/skins/_all-skins.css';
+
+
+create master.blade.php
+and copy admin-lte html code in thier.
+
+add this code:
+<script src="{{asset('js/app.js')}}"></script>
+
+
+change in home.blade.php
+app =--> master
+
+add in resources\js\bootstrap.js:
+require('admin-lte');
+
+in master.blade.php
+add csrf token:
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+to add image from public:
+<img src="{{asset('images/user-image.png')}}" class="img-circle" alt="User Image">
+
+solve vue error:
+<div class="wrapper" id="app">
+
+show current user logined:
+<p>{{Auth::user()->name}}</p>
+
+in C:\Windows\System32\drivers\etc\hosts:
+127.0.0.1 crud.test
+
+C:\xampp\apache\conf\extra\httpd-vhosts.conf:
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/crud/public"
+    ServerName crud.test
+</VirtualHost>
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
+---------------------------------
 ---------------------------------
