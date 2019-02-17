@@ -55,8 +55,8 @@ C:\xampp\apache\conf\extra\httpd-vhosts.conf:
     DocumentRoot "C:/xampp/htdocs/crud/public"
     ServerName crud.test
 </VirtualHost>
-
 ---------------------------------
+
 ( 4 )
 create Category model and migration:
 $ php artisan make:model Category -m
@@ -109,7 +109,54 @@ index.blade.php:
   </div>
 </div>
 @endsection
+---------------------------------
 
+( 5 )
+insert data into database from modal, and display in table
+
+add protected in Category modal:
+class Category extends Model
+{
+    protected $fillable = ['title', 'description'];
+}
+
+add Category modal in CategoryController:
+use App\Category;
+
+and insert data into database:
+public function index()
+{
+    return view('category.index');
+}
+
+send categories with to view:
+public function index()
+{
+    $categories = Category::all();
+    return view('category.index', compact('categories'));
+}
+
+show categories in table in view.blade.php:
+<table class="table">
+  <tbody>
+    <tr>
+      <th>#id</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Modify</th>
+    </tr>
+    @foreach ($categories as $category)
+    <tr>
+      <td>{{$category->id}}</td>
+      <td>{{$category->title}}</td>
+      <td>{{$category->description}}</td>
+      <td>{{$category->created_at}}</td>
+      <td>Edit / Delete</td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
 
 
 
